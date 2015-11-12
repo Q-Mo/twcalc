@@ -1,0 +1,60 @@
+title: $:/plugins/VincentYeh/twcalc/usage
+!! Usage
+* Add class """spreadsheet""" to a table to activate calculations on that table, or check the option """chktwveTcalcAllTables""" to activate calculations on all tables.
+* At the cell to store calculation results, __starts with an equal sign """="""__, as in ~OpenOffice.calc or Excel, followed by cell references/Javascript expressions/user-defined functions for calculation. For example,
+** """=Math.sqrt(3)""" and """=Math.cos(Math.PI)""" are valid Javascript statements;
+** """=A3+B4""" and """=sum(A6:D10)""" are ~OpenOffice.calc/Excel-like expressions.
+** See below for a brief list of user-defined functions.
+** @@color:red;Starting v3.0.0 this plugin relaxes the """starts with an equal sign""" requirement and supports """in-text calculations""".@@
+* @@color:blue;Cells for calculation can be specified in one of the following formats:@@
+** """func(A3:H6)""": calculate over a block of consecutive cells
+** """func(B3, H5, AC9,...)""": calculate over separated individual cells
+** """func(AA3:CD5, B5, Z7...)""": a mixture of the two cases
+* Use the following options to specify the decimal mark and thousands separation.
+** Option txtTWVEtcalcDecimalMark specifies the default decimal mark.
+** Option txtTWVEtcalcThousandSeparator specifies the default thousands separator.
+** Option chktwveTcalcThousandSeparated toggles application of thousands separation.
+* Pre-defined functions now include:
+** sum
+*** calculates the sum of cells
+** product
+*** calculates the product of cells
+** average/mean
+*** calculates the average value of cells
+** count
+*** counts the number of __numeric__ cells
+*** supports conditional counting, see revision
+**** Syntax: """=COUNT([condition], cell references)"""
+***** condition is optional and if given must be quoted with single or double quotes
+***** use the percentage symbol """%""" as a placeholder for the values to test
+**** Example, """=COUNT('%>60 && %<70', A1:A90)""" returns the number of numerical values greater than 60 and less than 70 among cells between A1 and A90, inclusively.
+** counta
+*** counts the number of __non-empty__ cells
+** concat
+*** joins the contents of cells
+** isNumeric
+*** tests whether a cell contains a numerical expression
+** today()/now()
+*** Current date and time. See Javascript references for details.
+** days(date1, date2, num_dec)
+*** Number of days (and time) from date1 to date2. The 3^^rd^^ argument num_dec specifies the number of digits after decimal point.
+**** If the 3^^rd^^ argument is given, this function returns """number of days""" such as """3.2""", with the number of digits after decimal point matching the 3^^rd^^ argument.
+**** If the 3^^rd^^ argument is missing, the function returns days and time difference, such as """1D 00:10:05""".
+** round(value, num_dec)
+*** Returns the rounded result of value, up to num_dec digits after decimal point raised to the nth power.
+** exp / ln / log10 / log
+*** Returns the exponential / natural logarithm / base-10 logarithm / arbitrary based logarithm of a number.
+** random(factor)
+*** Returns a random number between 0 and factor, if factor is given. Otherwise returns a random number between 0 and 1.
+** column/col
+*** Returns the column index (number). Without an argument this function returns the index of the current column, with a cell reference as its argument, such as COLUMN(~AX3)/COL(~AX3), it returns the column index of that cell.
+** columna/cola
+*** Returns the column reference (letter). Without an argument this function returns the reference of the current column, with a cell reference as its argument, such as COLUMN(~AX3)/COL(~AX3), it returns the column reference of that cell.
+** stderr/stdev
+*** Calculates the standard deviation of a set of numbers. @@color:red;This function is not yet fully tested.@@
+** if(condition, statement_if_true, statement_if_false)
+*** Works the same way as the IF() function in MS Excel, except that the statements can include wiki style text.
+**** For example, IF ($G1>=F1, color:blue;$~G1-F1, color:red;$~G1-F1) results in a @@color:blue;positive@@ or a @@color:red;negative@@ value of """|$G1-F1|""".
+
+!!Options
+Look for [[twve.tcalc Options]] in the Options Panel.

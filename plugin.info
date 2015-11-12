@@ -1,0 +1,9 @@
+{
+    "title": "$:/plugins/VincentYeh/twcalc",
+    "description": "A simple clculator for TiddlyWiki.",
+    "author": "VincentYeh",
+    "version": "0.0.1",
+    "core-version": ">=5.0.8",
+    "source": "https://github.com/Q-Mo/twcalc",
+    "plugin-type": "plugin"
+}
